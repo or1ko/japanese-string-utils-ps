@@ -60,7 +60,7 @@ Export-ModuleMember -Function ConvertTo-Zenkaku
 
  .Example
    # カタカナをひらがなに変換
-   ConvertTo-Hankaku "じゃパン" 
+   ConvertTo-Hiragana "じゃパン" 
    じゃぱん
 #>
 function ConvertTo-Hiragana {
