@@ -10,8 +10,8 @@
 
  .Example
    # 全角文字を半角文字に変換 
-   ConvertTo-Hankaku "aｂc１23アｲう" 
-   abc123ｱｲう
+   ConvertTo-Hankaku "aｂc１23アｲう．." 
+   abc123ｱｲう..
 #>
 function ConvertTo-Hankaku {
     param([String] $str)
@@ -35,8 +35,8 @@ Export-ModuleMember -Function ConvertTo-Hankaku
 
  .Example
    # 半角文字を全角文字に変換 
-   ConvertTo-Zenkaku "aｂc１23アｲう" 
-   ａｂｃ１２３アイう
+   ConvertTo-Zenkaku "aｂc１23アｲう．." 
+   ａｂｃ１２３アイう．．
 #>
 function ConvertTo-Zenkaku {
     param([String] $str)
