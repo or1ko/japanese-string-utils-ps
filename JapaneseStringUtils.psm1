@@ -10,7 +10,7 @@
 
  .Example
    # 全角文字を半角文字に変換 
-   ConvertTo-Ascii "aｂc１23" 
+   ConvertTo-Hankaku "aｂc１23" 
    abc123
 #>
 function ConvertTo-Hankaku {
