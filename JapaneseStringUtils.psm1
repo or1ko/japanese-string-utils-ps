@@ -47,3 +47,29 @@ function ConvertTo-Zenkaku {
     }
 }
 Export-ModuleMember -Function ConvertTo-Zenkaku
+
+<#
+ .Synopsis
+  カタカナをひらがなに変換します。
+
+ .Description
+  引数の文字列にあるカタカナをひらがなに変換します。
+
+ .Parameter Str
+  変換対象の文字列
+
+ .Example
+   # カタカナをひらがなに変換
+   ConvertTo-Hankaku "じゃパン" 
+   じゃぱん
+#>
+function ConvertTo-Hiragana {
+    param([String] $str)
+
+    process {
+      Add-Type -AssemblyName Microsoft.VisualBasic
+      return [Microsoft.VisualBasic.Strings]::StrConv($str, [Microsoft.VisualBasic.VbStrConv]::Hiragana)
+    }
+}
+Export-ModuleMember -Function ConvertTo-Hiragana
+
