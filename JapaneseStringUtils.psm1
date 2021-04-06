@@ -10,8 +10,8 @@
 
  .Example
    # 全角文字を半角文字に変換 
-   ConvertTo-Hankaku "aｂc１23" 
-   abc123
+   ConvertTo-Hankaku "aｂc１23アイう" 
+   abc123ｱｲう
 #>
 function ConvertTo-Hankaku {
     param([String] $str)
