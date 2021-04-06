@@ -73,3 +73,28 @@ function ConvertTo-Hiragana {
 }
 Export-ModuleMember -Function ConvertTo-Hiragana
 
+<#
+ .Synopsis
+  ひらがなをカタカナに変換します。
+
+ .Description
+  引数の文字列にあるひらがなをカタカナに変換します。
+
+ .Parameter Str
+  変換対象の文字列
+
+ .Example
+   # ひらがなをカタカナに変換
+   ConvertTo-Katakana "じゃパン" 
+   ジャパン
+#>
+function ConvertTo-Katakana {
+    param([String] $str)
+
+    process {
+      Add-Type -AssemblyName Microsoft.VisualBasic
+      return [Microsoft.VisualBasic.Strings]::StrConv($str, [Microsoft.VisualBasic.VbStrConv]::Katakana)
+    }
+}
+Export-ModuleMember -Function ConvertTo-Katakana
+
