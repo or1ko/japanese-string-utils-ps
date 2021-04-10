@@ -98,3 +98,49 @@ function ConvertTo-Katakana {
 }
 Export-ModuleMember -Function ConvertTo-Katakana
 
+<#
+ .Synopsis
+  漢数字を数値に変換します
+
+ .Description
+  引数の文字列の漢数字を数値に変換します
+
+ .Parameter Str
+  変換対象の文字列
+
+ .Example
+   # ひらがなをカタカナに変換
+   ConvertFrom-Kansuuji "一"
+   1
+#>
+function ConvertFrom-Kansuuji {
+    param([String] $str)
+
+    process {
+
+      $kan2ara = @{
+        "一" = 1;
+        "二" = 2;
+        "三" = 3;
+        "四" = 4;
+        "五" = 5;
+        "六" = 6;
+        "七" = 7;
+        "八" = 8;
+        "九" = 9;
+      }
+
+
+      $cs = $str.ToCharArray() | 
+      ForEach-Object {
+        if ($kan2ara.ContainsKey("$_")) {
+          $kan2ara["$_"]
+        } else {
+          $_
+        }
+      }
+
+      $cs -join ""
+    }
+}
+Export-ModuleMember -Function ConvertFrom-Kansuuji
