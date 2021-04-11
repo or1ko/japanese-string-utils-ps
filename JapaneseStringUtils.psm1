@@ -9,8 +9,8 @@
   変換対象の文字列
 
  .Example
-   # 全角文字を半角文字に変換 
-   ConvertTo-Hankaku "aｂc１23アｲう．." 
+   #全角文字を半角文字に変換
+   ConvertTo-Hankaku "aｂc１23アｲう．."
    abc123ｱｲう..
 #>
 function ConvertTo-Hankaku {
@@ -34,8 +34,8 @@ Export-ModuleMember -Function ConvertTo-Hankaku
   変換対象の文字列
 
  .Example
-   # 半角文字を全角文字に変換 
-   ConvertTo-Zenkaku "aｂc１23アｲう．." 
+   # 半角文字を全角文字に変換
+   ConvertTo-Zenkaku "aｂc１23アｲう．."
    ａｂｃ１２３アイう．．
 #>
 function ConvertTo-Zenkaku {
@@ -60,7 +60,7 @@ Export-ModuleMember -Function ConvertTo-Zenkaku
 
  .Example
    # カタカナをひらがなに変換
-   ConvertTo-Hiragana "じゃパン" 
+   ConvertTo-Hiragana "じゃパン"
    じゃぱん
 #>
 function ConvertTo-Hiragana {
@@ -85,7 +85,7 @@ Export-ModuleMember -Function ConvertTo-Hiragana
 
  .Example
    # ひらがなをカタカナに変換
-   ConvertTo-Katakana "じゃパン" 
+   ConvertTo-Katakana "じゃパン"
    ジャパン
 #>
 function ConvertTo-Katakana {
@@ -199,7 +199,7 @@ function ConvertFrom-Kansuuji {
           $beforeNum = $kan2ara[$kan2 + ""]
           $strIndex = $strIndex + 1
           continue
-        } 
+        }
 
         # 十,千,万などか調べ、一つ前に数字があれば、その値と掛けた値を$numに加算
         # 例えば「二十」の場合、二(2) * 10で$numに20を加算。
@@ -213,7 +213,7 @@ function ConvertFrom-Kansuuji {
           } else {
             $baseNum = $beforeNum
           }
-          
+
           $tani = $tani2ara[$matchedTani + ""]
           $mod = $num % $tani
           if ($null -eq $beforeNum) {
@@ -234,7 +234,7 @@ function ConvertFrom-Kansuuji {
         if ($isNum) {
           $isNum = $false
           if ($null -ne $beforeNum) {
-            $num = $num + $beforeNum 
+            $num = $num + $beforeNum
             $beforeNum = $null
           }
           $converted = $converted + $num
@@ -247,7 +247,7 @@ function ConvertFrom-Kansuuji {
 
       if ($isNum) {
         if ($null -ne $beforeNum) {
-          $num = $num + $beforeNum 
+          $num = $num + $beforeNum
           $beforeNum = $null
         }
         $converted = $converted + $num
