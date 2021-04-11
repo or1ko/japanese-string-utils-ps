@@ -119,6 +119,7 @@ function ConvertFrom-Kansuuji {
     process {
 
       $kan2ara = @{
+        "零" = 0;
         "一" = 1;
         "二" = 2;
         "三" = 3;
@@ -154,23 +155,30 @@ function ConvertFrom-Kansuuji {
       }
 
       $result = ""
-      $isNum = $false
 
-      $i = 0
+      $strIndex = 0
+      $isNum = $false # $str[$i]が漢数字中かいなかを示す変数
+
+      # 一つ前の数を保持する変数。
+      # 例えば、「二十」の場合に、十を処理している時は2(二)が格納
       $beforeNum = $null
 
       $numResult = 0
-      while($i -lt $str.Length) {
-        $sub = $str.Substring($i);
+      while($strIndex -lt $str.Length) {
+        $sub = $str.Substring($strIndex);
 
         $kan2 = $kan2ara.Keys | Where-Object { $sub.StartsWith($_) }
         if ($kan2.Count) {
           $isNum = $true
 
+          if ($null -ne $beforeNum) {
+            $result = $result + $beforeNum
+          }
+
           $beforeNum = $kan2ara[$kan2 + ""]
-          $i = $i + 1
+          $strIndex = $strIndex + 1
           continue
-        }
+        } 
 
         $matchedTani = $tani2ara.Keys | Where-Object { $sub.StartsWith($_) }
         if ($matchedTani.Count) {
@@ -199,7 +207,7 @@ function ConvertFrom-Kansuuji {
           }
 
           $beforeNum = $null;
-          $i = $i + $matchedTani.Length
+          $strIndex = $strIndex + $matchedTani.Length
           continue
         }
 
@@ -216,9 +224,8 @@ function ConvertFrom-Kansuuji {
         }
 
         $result = $result + $sub[0]
-        $i = $i + 1
+        $strIndex = $strIndex + 1
       }
-
 
       if ($isNum) {
 
