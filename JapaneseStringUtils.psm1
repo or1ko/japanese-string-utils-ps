@@ -118,6 +118,8 @@ function ConvertFrom-Kansuuji {
 
     process {
 
+      $str = ConvertTo-Hankaku $str
+
       $kan2ara = @{
         "零" = 0;
         "〇" = 0;
