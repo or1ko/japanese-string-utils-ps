@@ -110,8 +110,8 @@ Export-ModuleMember -Function ConvertTo-Katakana
 
  .Example
    # ひらがなをカタカナに変換
-   ConvertFrom-Kansuuji "一"
-   1
+   ConvertFrom-Kansuuji "１億５千万および百三十一"
+   150000000および131
 #>
 function ConvertFrom-Kansuuji {
     param([String] $str)
