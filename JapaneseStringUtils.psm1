@@ -162,7 +162,7 @@ function ConvertFrom-Kansuuji {
         "拾" = 10;
       }
 
-      $result = ""
+      $converted = ""
 
       $strIndex = 0
       $isNum = $false # $str[$i]が漢数字中かいなかを示す変数
@@ -171,16 +171,17 @@ function ConvertFrom-Kansuuji {
       # 例えば、「二十」の場合に、十を処理している時は2(二)が格納
       $beforeNum = $null
 
-      $numResult = 0
+      $num = 0
       while($strIndex -lt $str.Length) {
         $sub = $str.Substring($strIndex);
 
+        # 一～九の数字か調べ、$beforeNumに変換後の値を格納し、次の文字を処理する
         $kan2 = $kan2ara.Keys | Where-Object { $sub.StartsWith($_) }
         if ($kan2.Count) {
           $isNum = $true
 
           if ($null -ne $beforeNum) {
-            $result = $result + $beforeNum
+            $converted = $converted + $beforeNum
           }
 
           $beforeNum = $kan2ara[$kan2 + ""]
@@ -188,6 +189,9 @@ function ConvertFrom-Kansuuji {
           continue
         } 
 
+        # 十,千,万などか調べ、一つ前に数字があれば、その値と掛けた値を$numに加算
+        # 例えば「二十」の場合、二(2) * 10で$numに20を加算。
+        # 加算するのは、例えば「二十」の前に「百」があり「百二十」となっている場合への対応
         $matchedTani = $tani2ara.Keys | Where-Object { $sub.StartsWith($_) }
         if ($matchedTani.Count) {
           $isNum = $true
@@ -200,18 +204,18 @@ function ConvertFrom-Kansuuji {
           
           $tani = $tani2ara[$matchedTani + ""]
 
-          if ($tani -gt $numResult) {
+          if ($tani -gt $num) { # 例えば、百一万といった場合への対応
             if ($null -eq $beforeNum) {
-              if ($numResult -eq 0) {
-                $numResult = 1 * $tani
+              if ($num -eq 0) {
+                $num = 1 * $tani
               } else {
-                $numResult = $numResult * $tani
+                $num = $num * $tani
               }
             } else {
-              $numResult = ($numResult + $baseNum) * $tani
+              $num = ($num + $baseNum) * $tani
             }
           } else {
-            $numResult = $numResult + $baseNum * $tani
+            $num = $num + $baseNum * $tani
           }
 
           $beforeNum = $null;
@@ -221,33 +225,28 @@ function ConvertFrom-Kansuuji {
 
         if ($isNum) {
           $isNum = $false
-
           if ($null -ne $beforeNum) {
-            $numResult = $numResult + $beforeNum 
+            $num = $num + $beforeNum 
             $beforeNum = $null
           }
-
-          $result = $result + $numResult
-          $numResult = 0
+          $converted = $converted + $num
+          $num = 0
         }
 
-        $result = $result + $sub[0]
+        $converted = $converted + $sub[0]
         $strIndex = $strIndex + 1
       }
 
       if ($isNum) {
-
         if ($null -ne $beforeNum) {
-          $numResult = $numResult + $beforeNum 
+          $num = $num + $beforeNum 
           $beforeNum = $null
         }
-
-        $result = $result + $numResult
-        $numResult = 0
+        $converted = $converted + $num
+        $num = 0
       }
 
-      $result
-
+      $converted
     }
 }
 Export-ModuleMember -Function ConvertFrom-Kansuuji
