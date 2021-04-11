@@ -135,6 +135,16 @@ function ConvertFrom-Kansuuji {
         "壱" = 1;
         "弐" = 2;
         "参" = 3;
+
+        "1" = 1;
+        "2" = 2;
+        "3" = 3;
+        "4" = 4;
+        "5" = 5;
+        "6" = 6;
+        "7" = 7;
+        "8" = 8;
+        "9" = 9;
       }
 
       $tani2ara = @{
@@ -203,19 +213,15 @@ function ConvertFrom-Kansuuji {
           }
           
           $tani = $tani2ara[$matchedTani + ""]
-
-          if ($tani -gt $num) { # 例えば、百一万といった場合への対応
-            if ($null -eq $beforeNum) {
-              if ($num -eq 0) {
-                $num = 1 * $tani
-              } else {
-                $num = $num * $tani
-              }
+          $mod = $num % $tani
+          if ($null -eq $beforeNum) {
+            if ($mod -eq 0) {
+              $num = $num + (1 * $tani)
             } else {
-              $num = ($num + $baseNum) * $tani
+              $num = ($num - $mod) + ($mod * $tani)
             }
           } else {
-            $num = $num + $baseNum * $tani
+            $num = ($num - $mod) + (($mod + $baseNum) * $tani)
           }
 
           $beforeNum = $null;
