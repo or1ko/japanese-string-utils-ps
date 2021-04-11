@@ -120,6 +120,8 @@ function ConvertFrom-Kansuuji {
 
       $kan2ara = @{
         "零" = 0;
+        "〇" = 0;
+
         "一" = 1;
         "二" = 2;
         "三" = 3;
@@ -129,6 +131,10 @@ function ConvertFrom-Kansuuji {
         "七" = 7;
         "八" = 8;
         "九" = 9;
+
+        "壱" = 1;
+        "弐" = 2;
+        "参" = 3;
       }
 
       $tani2ara = @{
@@ -152,6 +158,8 @@ function ConvertFrom-Kansuuji {
         "那由他" = [Math]::Pow(10, 60);
         "不可思議" = [Math]::Pow(10, 64);
         "無量大数" = [Math]::Pow(10, 68);
+
+        "拾" = 10;
       }
 
       $result = ""
