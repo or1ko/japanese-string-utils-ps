@@ -21,7 +21,6 @@ function ConvertTo-Hankaku {
       return [Microsoft.VisualBasic.Strings]::StrConv($str, [Microsoft.VisualBasic.VbStrConv]::Narrow)
     }
 }
-Export-ModuleMember -Function ConvertTo-Hankaku
 
 <#
  .Synopsis
@@ -71,7 +70,6 @@ function ConvertTo-Hiragana {
       return [Microsoft.VisualBasic.Strings]::StrConv($str, [Microsoft.VisualBasic.VbStrConv]::Hiragana)
     }
 }
-Export-ModuleMember -Function ConvertTo-Hiragana
 
 <#
  .Synopsis
@@ -96,7 +94,6 @@ function ConvertTo-Katakana {
       return [Microsoft.VisualBasic.Strings]::StrConv($str, [Microsoft.VisualBasic.VbStrConv]::Katakana)
     }
 }
-Export-ModuleMember -Function ConvertTo-Katakana
 
 <#
  .Synopsis
@@ -257,4 +254,4 @@ function ConvertFrom-Kansuuji {
       $converted
     }
 }
-Export-ModuleMember -Function ConvertFrom-Kansuuji
+Export-ModuleMember -Function *
