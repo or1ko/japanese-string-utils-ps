@@ -6,6 +6,9 @@
 
 https://github.com/yomotsu/japanese-string-utils
 
+
+![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/JapaneseStringUtils) [![GitHub license](https://img.shields.io/github/license/or1ko/japanese-string-utils-ps)](https://github.com/or1ko/japanese-string-utils-ps/blob/main/LICENSE)
+
 ## 利用方法
 
 インストール
